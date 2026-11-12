@@ -157,7 +157,7 @@
     <button class="btn" data-act="export">Exporter JSON</button>
     <button class="btn" data-act="import">Importer JSON</button>
     <button class="btn danger" data-act="reset">Réinitialiser</button>
-    <button class="btn" data-act="install" id="installBtn" hidden>⤓ Installer</button>
+    <button class="btn pri" data-act="install" id="installBtn">⤓ Installer l'appli</button>
     <input type="file" id="file" accept="application/json,.json" hidden>
   </header>
   <div class="layout">
@@ -780,12 +780,14 @@ function syncSheet(){ document.body.classList.toggle("side-open", narrow.matches
 let deferredPrompt=null;
 const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 const isStandalone=window.matchMedia("(display-mode:standalone)").matches||navigator.standalone===true;
-if(isIOS&&!isStandalone) $("#installBtn").hidden=false;
+if(isStandalone) $("#installBtn").hidden=true;
 window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;$("#installBtn").hidden=false;});
 window.addEventListener("appinstalled",()=>{deferredPrompt=null;$("#installBtn").hidden=true;});
 function installApp(){
   if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.finally(()=>{deferredPrompt=null;$("#installBtn").hidden=true;});}
-  else alert("Pour installer : bouton Partager de Safari, puis « Sur l'écran d'accueil ».");
+  else if(isIOS) alert("Sur iPhone/iPad : touche le bouton Partager de Safari, puis « Sur l'écran d'accueil ».");
+  else if(location.protocol!=="https:"&&location.hostname!=="localhost") alert("L'installation demande une adresse https (ex : GitHub Pages).");
+  else alert("Utilise l'icône d'installation dans la barre d'adresse du navigateur, ou le menu ⋮ → « Installer l'application ».");
 }
 if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
   window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
