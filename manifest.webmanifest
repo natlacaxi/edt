@@ -1,0 +1,25 @@
+{
+  "name": "Éditeur d'emploi du temps",
+  "short_name": "Emploi du temps",
+  "description": "Crée et modifie des emplois du temps, export PDF, fonctionne hors ligne.",
+  "lang": "fr",
+  "dir": "ltr",
+  "id": "./",
+  "start_url": "./?source=pwa",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#f3f4f6",
+  "theme_color": "#00a7b5",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+    {"src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ],
+  "shortcuts": [
+    {"name": "Nouveau cours", "short_name": "Cours", "url": "./?action=new", "icons": [{"src": "icon-192.png", "sizes": "192x192"}]}
+  ]
+}
